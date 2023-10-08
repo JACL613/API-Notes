@@ -1,0 +1,35 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API NOTES</title>
+</head>
+<body>
+    <script>
+        var nota;
+        fetch('http://localhost:3300/api/notes/',{
+            method: 'GET',
+            headers:{
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMmU4MTdlYmI3YjMwYjIzOGZjZTYwMiIsIm5hbWV1c2VyIjoibHVpc1VzZXIiLCJpYXQiOjE2NjM5OTIyMTF9.yh8hUaBtp2lh1wTDPTWsdDP7t009feIyej8apK7ijsY'
+  }
+        })
+        .then(res => res.json())
+        .then(res => {
+            nota = res; 
+            document.querySelector('#allNotes').innerHTML = `
+            <h2>${nota[0].title}</h2>
+            <p>${nota[0].content}</p>
+            <h3>${nota[0].userAuthor.nameuser}</h3>
+            <h4>${nota[0].date}
+            `;
+        });
+        console.log(nota);
+    </script>
+    <h1>HOME PAGE STATIC</h1>
+    <div id="allNotes"></div>
+
+   
+</body>
+</html>

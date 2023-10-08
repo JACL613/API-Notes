@@ -1,0 +1,8 @@
+POST http://localhost:3001/api/notes/createNote
+Content-Type : application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMmU4MTdlYmI3YjMwYjIzOGZjZTYwMiIsIm5hbWV1c2VyIjoibHVpc1VzZXIiLCJpYXQiOjE2NjM5OTIyMTF9.yh8hUaBtp2lh1wTDPTWsdDP7t009feIyej8apK7ijsY
+
+{
+    "title": "Nota prueba v3",
+    "content": "nota de prueba v3"
+}

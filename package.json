@@ -1,0 +1,36 @@
+{
+  "name": "api-notes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=production node ./server/index.server.js",
+    "start:dev": "cross-env NODE_ENV=developement nodemon ./server/index.server.js",
+    "start:test": "cross-env NODE_ENV=test nodemon ./server/index.server.js",
+    "test": "cross-env NODE_ENV=test  jest --verbose",
+    "test:watch": "npm run test -- --watch"
+  },
+  "keywords": [],
+  "author": "JACL",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "5.0.1",
+    "cors": "2.8.5",
+    "cross-env": "7.0.3",
+    "dotenv": "16.0.1",
+    "express": "4.18.1",
+    "jsonwebtoken": "9.0.2",
+    "mongoose": "^6.12.0",
+    "mongoose-unique-validator": "3.1.0",
+    "morgan": "1.10.0"
+  },
+  "devDependencies": {
+    "jest": "29.0.3",
+    "nodemon": "^3.0.1",
+    "supertest": "6.2.4"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "verbose": true
+  }
+}

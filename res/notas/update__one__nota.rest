@@ -1,0 +1,8 @@
+PUT http://localhost:3300/api/notes/62aa9eead26b9ce55247bb16
+Content-Type : application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYTkzYjExZWU1ZDRjYmFkZmJjNTViYSIsIm5hbWV1c2VyIjoibHVpc1VzZXIiLCJpYXQiOjE2NjIyNjA2MDR9.OFfnVLq2yPUUIfeEDTGCg6t986HdI7dxgSXRPq1Tkd0
+
+{
+    "title": "Nota: Nota Actualizada",
+    "content": "Ya programe"
+}
