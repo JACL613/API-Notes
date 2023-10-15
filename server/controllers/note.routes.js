@@ -1,22 +1,9 @@
-const jwt = require('jsonwebtoken')
 const noteRouter = require('express').Router()
 const Note = require('../../databases/models/Model.Note')
 const User = require('../../databases/models/Model.User')
 
 noteRouter.get('/', async (req, res) => {
-  const autorization = req.get('authorization')
-  let token = ''
-
-  if (autorization && autorization.toLowerCase().startsWith('bearer')) {
-    token = autorization.substring(7)
-  }
-  if (!token) {
-    return res.status(400).json({ menssage: 'Invalid token' })
-  }
-  const decodedToken = jwt.verify(token, process.env.SECRET)
-  if (!token || !decodedToken) {
-    return res.status(400).json({ error: 'Invalid token' })
-  }
+  
   const Notes = await Note.find({}).populate({
     path: 'userAuthor',
     select: { name: 1, nameuser: 1, _id: 0 }
@@ -32,7 +19,7 @@ noteRouter.get('/oneNote/:id', async (req, res) => {
     _id: 0
   })
   if (query === null) {
-    res.status(404).send({ error: 'No se encontro la nota' })
+    res.status(404).send({ error: 'No se encontró la nota' })
   }
   res.send(query)
 })
@@ -43,20 +30,8 @@ noteRouter.post('/createNote', async (req, res) => {
     title,
     content
   } = body
-  const autorization = req.get('authorization')
-  let token = ''
-
-  if (autorization && autorization.toLowerCase().startsWith('bearer')) {
-    token = autorization.substring(7)
-  }
-  if (!token) {
-    return res.status(400).json({ menssage: 'Invalid token' })
-  }
-  const decodedToken = jwt.verify(token, process.env.SECRET)
-  if (!token || !decodedToken) {
-    return res.status(400).json({ error: 'Invalid Authotization' })
-  }
   const { id: userId } = decodedToken
+  console.log(userId);
   const user = await User.findById(userId)
   if (!content || !title) {
     return res.status(400).json({ error: 'Invalid content or title' })
@@ -72,6 +47,10 @@ noteRouter.post('/createNote', async (req, res) => {
       return res.status(400).json({ error: 'Invalid content or title have create' })
     }
   }
+  console.log(user);
+  if (!user || user == null || user==undefined) {
+    return res.status(400).json({ error: 'Invalid User sesión' })
+  }
   const noteNew = new Note({
     title,
     content,
@@ -85,74 +64,25 @@ noteRouter.post('/createNote', async (req, res) => {
   res.status(200).json(noteNew)
 })
 noteRouter.delete('/:id', async (req, res) => {
-  const authorization = req.get('authorization')
-  let token = ''
-
-  if (authorization && authorization.toLowerCase().startsWith('bearer')) {
-    token = authorization.substring(7)
-  }
-  if (!token) {
-    return res.status(400).json({ error: 'Invalid token' })
-  }
-  const decodedToken = jwt.verify(token, process.env.SECRET)
-  if (!token || !decodedToken) {
-    return res.status(400).json({ error: 'Invalid token' })
-  }
   const { id: noteId } = req.params
-  const query = await Note.findById(noteId).populate({
-    path: 'userAuthor',
-    select: {
-      name: 1,
-      nameuser: 1,
-      _id: 0
-    }
-  })
-  const { nameuser } = decodedToken
-  const { userAuthor: user } = query
-  if (nameuser !== user.nameuser) {
-    return res.status(400).json({ error: 'Usuario Invalid' })
-  }
 
   const noteDelete = await Note.findByIdAndRemove(noteId)
   res.send(noteDelete)
 })
 noteRouter.put('/:id', async (req, res) => {
-  const authorization = req.get('authorization')
-  let token = ''
-
-  if (authorization && authorization.toLowerCase().startsWith('bearer')) {
-    token = authorization.substring(7)
-  }
-  if (!token) {
-    return res.status(400).json({ error: 'Invalid token' })
-  }
-  const decodedToken = jwt.verify(token, process.env.SECRET)
-  if (!token || !decodedToken) {
-    return res.status(400).json({ error: 'Invalid token' })
-  }
+  console.log(req.body);
   const { body } = req
   const noteId = req.params.id
-  const { title, content } = body
-  const { id: userId } = decodedToken
+  const { title, content , user } = body
 
-  const query = await Note.findById(noteId).populate('userAuthor', {
-    name: 1,
-    nameuser: 1,
-    _id: 0
-  })
-  const { nameuser } = decodedToken
-  const { userAuthor: user } = query
-  if (nameuser !== user.nameuser) {
-    return res.status(400).json({ error: 'Usuario Invalid' })
-  } else {
     const newNote = {
       title,
       content,
       date: new Date().getTime(),
-      userAuthor: userId
+      userAuthor: user._id
     }
     const noteUpdate = await Note.findByIdAndUpdate({ _id: noteId }, newNote)
     return res.send(noteUpdate)
-  }
+  
 })
 module.exports = noteRouter

@@ -5,13 +5,16 @@ const cors = require('cors')
 const path = require('path')
 const app = express()
 
+
 require('../databases/connectionsDB')
 
 const noteRouter = require('./controllers/note.routes')
 const userRouter = require('./controllers/user.routes')
+const middelware = require('../Utils/middelware')
 
 app.use(express.json())
 app.use(morgan('dev'))
+app.use(middelware.requestLogger)
 app.use(cors())
 if (process.env.NODE_ENV === 'test') {
   console.log('entorno de tests')
@@ -22,7 +25,7 @@ if (process.env.NODE_ENV === 'test') {
 }
 
 app.use('/api/users', userRouter)
-app.use('/api/notes', noteRouter)
+app.use('/api/notes',middelware.getAutorization, noteRouter)
 app.use(express.static(path.join((__dirname, '../app/build'))))
 
 // app.get('/', function (req, res) {

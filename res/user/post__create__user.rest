@@ -1,8 +1,8 @@
-POST https://api-notes-production.up.railway.app/create
+POST https://api-notes-production.up.railway.app/api/users/create
 Content-Type : application/json
 
 {
-    "name": "luis",
-    "nameuser": "luisUser",
-    "password": "Laluispassword"
+    "name": "root2",
+    "nameuser": "rootUser2",
+    "password": "LarootPassword2"
 }
