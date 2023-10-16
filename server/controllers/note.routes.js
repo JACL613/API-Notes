@@ -69,10 +69,10 @@ noteRouter.delete('/:id', async (req, res) => {
   const noteDelete = await Note.findByIdAndRemove(noteId)
   res.send(noteDelete)
 })
-noteRouter.put('/:id', async (req, res) => {
+noteRouter.put('/', async (req, res) => {
   console.log(req.body);
   const { body } = req
-  const noteId = req.params.id
+  const noteId = req.get('id')
   const { title, content , user } = body
 
     const newNote = {
