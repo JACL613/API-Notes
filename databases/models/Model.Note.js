@@ -5,6 +5,7 @@ const SchemaNote = new Schema({
   title: { type: String, require: true, unique: true },
   content: { type: String, require: true },
   date: { type: Date, require: true },
+  stating: { type: Boolean, default: false, require: true},
   userAuthor: { type: Schema.Types.ObjectId, ref: 'User' }
 })
 SchemaNote.set('toJSON', {

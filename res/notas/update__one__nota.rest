@@ -1,8 +1,9 @@
-PUT http://localhost:3003/api/notes/62aa9eead26b9ce55247bb16
+PUT http://localhost:3003/api/notes/    
 Content-Type : application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYTkzYjExZWU1ZDRjYmFkZmJjNTViYSIsIm5hbWV1c2VyIjoibHVpc1VzZXIiLCJpYXQiOjE2NjIyNjA2MDR9.OFfnVLq2yPUUIfeEDTGCg6t986HdI7dxgSXRPq1Tkd0
-Id: 62aa9eead26b9ce55247bb16
+Id: 631404b1e8f0c3982f04e713
+
 {
-    "title": "Nota: Nota Actualizada 2",
+    "title": "Nota: Nota Actualizada 5",
     "content": "Ya programe"
 }

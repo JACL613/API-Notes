@@ -3,39 +3,52 @@ const Note = require('../../databases/models/Model.Note')
 const User = require('../../databases/models/Model.User')
 
 noteRouter.get('/', async (req, res) => {
-  
+  // !Obtiene todas las notas
   const Notes = await Note.find({}).populate({
     path: 'userAuthor',
     select: { name: 1, nameuser: 1, _id: 0 }
   })
-  const filterNote = Notes.filter(item => item.userAuthor.nameuser === decodedToken.nameuser)
+  // las filtra por el nombre de usuario
+  const nameuser = req.body.user.nameuser
+  const filterNote = Notes.filter(item => item.userAuthor.nameuser === nameuser)
   res.json(filterNote)
 })
-noteRouter.get('/oneNote/:id', async (req, res) => {
-  const id = req.params.id
+noteRouter.get('/one/', async (req, res) => {
+  // !Obtiene una sola nota
+  const id = req.get('id')
   const query = await Note.findById(id).populate('userAuthor', {
     name: 1,
     nameuser: 1,
     _id: 0
   })
   if (query === null) {
+    // en caso de no encontrarla
     res.status(404).send({ error: 'No se encontró la nota' })
   }
   res.send(query)
 })
 
-noteRouter.post('/createNote', async (req, res) => {
+noteRouter.post('/create', async (req, res) => {
+  // !Crea una nota
+
+  // desestructuración  del cuerpo de la petición  
   const { body } = req
   const {
     title,
     content
   } = body
-  const { id: userId } = decodedToken
-  console.log(userId);
-  const user = await User.findById(userId)
+  // comprueba que el contenido no este vació
   if (!content || !title) {
     return res.status(400).json({ error: 'Invalid content or title' })
   }
+  // Toma el id usuario y comprueba que la nota pertenece a su colección
+  const userId  = body.user.id
+  const user = await User.findById(userId)
+  console.log(user);
+  if (!user || user == null || user==undefined) {
+    return res.status(400).json({ error: 'Invalid User sesión' })
+  }
+  // Comprueba que el contenido de la nota no este duplicada
   const query = await Note.find({
     $or: [
       { title },
@@ -47,10 +60,7 @@ noteRouter.post('/createNote', async (req, res) => {
       return res.status(400).json({ error: 'Invalid content or title have create' })
     }
   }
-  console.log(user);
-  if (!user || user == null || user==undefined) {
-    return res.status(400).json({ error: 'Invalid User sesión' })
-  }
+  // Después se guarda la nota y se concatena a la colección del usuario
   const noteNew = new Note({
     title,
     content,
@@ -61,19 +71,28 @@ noteRouter.post('/createNote', async (req, res) => {
   user.note = user.note.concat(saveNote._id)
   await user.save()
 
-  res.status(200).json(noteNew)
+  res.status(200).json(noteNew) 
 })
-noteRouter.delete('/:id', async (req, res) => {
-  const { id: noteId } = req.params
+
+noteRouter.delete('/', async (req, res) => {
+  // !Borrar Una Nota
+
+  // Obtiene el id de la nota y la borra (devuelve la nota borrada)
+  const noteId  = req.get('id')
 
   const noteDelete = await Note.findByIdAndRemove(noteId)
   res.send(noteDelete)
 })
+
 noteRouter.put('/', async (req, res) => {
-  console.log(req.body);
+  // !Actualiza una nota
+
+  // desestructuración del cuerpo de la petición 
   const { body } = req
-  const noteId = req.get('id')
   const { title, content , user } = body
+
+  // Toma el id de la nota y la actualiza con el nuevo contenido
+  const noteId = req.get('id')
 
     const newNote = {
       title,

@@ -1,5 +1,6 @@
-DELETE http://localhost:3300/api/notes/628e6e963869d5ff16f8d376
+DELETE http://localhost:3003/api/notes/
 Content-Type : application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOGU2ZDk4OGMwOGE5YjIwZWRkMTMwNiIsIm5hbWV1c2VyIjoiYWxleDI2IiwiaWF0IjoxNjUzNTAxNDg2fQ.OW5fWtOKeQkCmTP6xzvyNJWnLEp8Jb9JkviW8f8wG_Y
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYTkzYjExZWU1ZDRjYmFkZmJjNTViYSIsIm5hbWV1c2VyIjoibHVpc1VzZXIiLCJpYXQiOjE2NjIyNjA2MDR9.OFfnVLq2yPUUIfeEDTGCg6t986HdI7dxgSXRPq1Tkd0
+Id: 6313cb40e8f0c3982f04e6ad
 
 {}

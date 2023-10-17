@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 mongoose.set('strictQuery', false)
 let conecctionString = process.env.DB_URI
-// console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === 'test') {
   console.log('entorno de tests')
   conecctionString = process.env.DB_URI_TEST
