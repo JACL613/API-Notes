@@ -33,8 +33,8 @@ const getAutorization = async (req, res, next) => {
     const query = await Note.findById(noteId).populate({
       path: 'userAuthor',
       select: {
-        name: 1,
-        nameuser: 1,
+        firstName: 1,
+        email: 1,
         _id: 1
       }
     })

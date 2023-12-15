@@ -5,9 +5,8 @@ const SchemaUser = new Schema({
   firstName: { type: String, require: true, unique: true },
   lastName: { type: String, require: true, unique: true },
   email: { type: String, require: true, unique: true },
-  // 
   passwordHash: { type: String, require: true, unique: true },
-  notes: [{ type: Schema.Types.ObjectId, ref: 'Note' }],
+  notes: [{ type: Schema.Types.ObjectId, ref: 'Note' }]
 })
 
 SchemaUser.set('toJSON', {

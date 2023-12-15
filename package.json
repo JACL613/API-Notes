@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=production node ./server/index.server.js",
-    "start:dev": "cross-env NODE_ENV=developement nodemon ./server/index.server.js",
-    "start:test": "cross-env NODE_ENV=test nodemon ./server/index.server.js",
+    "start": "cross-env NODE_ENV=production node ./src/server/index.server.js",
+    "start:dev": "cross-env NODE_ENV=developement nodemon ./src/server/index.server.js",
+    "start:test": "cross-env NODE_ENV=test nodemon ./src/server/index.server.js",
     "test": "cross-env NODE_ENV=test  jest --verbose",
     "test:watch": "npm run test -- --watch",
     "lint": "eslint --fix ./src/*/*.js "
