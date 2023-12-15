@@ -4,7 +4,7 @@ let conecctionString = process.env.DB_URI
 if (process.env.NODE_ENV === 'test') {
   console.log('entorno de tests')
   conecctionString = process.env.DB_URI_TEST
-} 
+}
 
 mongoose.connect(`${conecctionString}`)
   .then(() => {

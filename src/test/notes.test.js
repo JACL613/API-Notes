@@ -27,7 +27,7 @@ beforeEach(async () => {
   token = await handelForLogin()
 })
 
-describe('All Test CRUD ', () => {
+describe('All Test CRUD', () => {
   // ! GETS
   // * Test de tipo Get nota unitataria por id
   test('CRUD:Get one note for id', async () => {

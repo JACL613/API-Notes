@@ -1,14 +1,13 @@
 const { Schema, model } = require('mongoose')
 const uniqueValidator = require('mongoose-unique-validator')
-
+// esquema del modelo de usuarios
 const SchemaUser = new Schema({
-  name: { type: String, require: true, unique: true },
-  nameuser: { type: String, require: true, unique: true },
+  firstName: { type: String, require: true, unique: true },
+  lastName: { type: String, require: true, unique: true },
+  email: { type: String, require: true, unique: true },
+  // 
   passwordHash: { type: String, require: true, unique: true },
-  date: { type: Date },
-  note: [{ type: Schema.Types.ObjectId, ref: 'Note' }],
-  refAvatar: { type: Number, require: true, default: 0 }
-
+  notes: [{ type: Schema.Types.ObjectId, ref: 'Note' }],
 })
 
 SchemaUser.set('toJSON', {

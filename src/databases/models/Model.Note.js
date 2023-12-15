@@ -4,8 +4,9 @@ const uniqueValidator = require('mongoose-unique-validator')
 const SchemaNote = new Schema({
   title: { type: String, require: true, unique: true },
   content: { type: String, require: true },
-  date: { type: Date, require: true },
-  stating: { type: Boolean, default: false, require: true},
+  startDate: { type: Date , default: new Date() , require: true },
+  finishDate: { type: Date, default: new Date() },
+  statusNote: { type: String, require: true, default: false },
   userAuthor: { type: Schema.Types.ObjectId, ref: 'User' }
 })
 SchemaNote.set('toJSON', {
