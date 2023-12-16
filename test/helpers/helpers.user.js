@@ -1,5 +1,4 @@
 const bcrypt = require('bcrypt')
-// const {dezz} = require('./helpers.notes')
 const supertest = require('supertest')
 const User = require('../../databases/models/Model.User.js')
 const { app } = require('../../server/index.server')
@@ -12,7 +11,7 @@ const defaultUser = {
   refAvatar: 2
 }
 
-// ! login for user
+// ! Registro de usuario admin 
 const handelCreateUser = async () => {
   const passwordHash = await bcrypt.hash(defaultUser.password, 10)
   const user = new User({
@@ -26,7 +25,7 @@ const handelCreateUser = async () => {
   const id = saveUser._id.toString()
   return id
 }
-//! inicio de sesion user admin
+//! inicio de sesión user admin
 const handelForLogin = async () => {
   const userToken = await api
     .post('/api/users/login')

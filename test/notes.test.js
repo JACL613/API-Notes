@@ -29,13 +29,15 @@ beforeEach(async () => {
 
 describe('All Test CRUD ', () => {
   // ! GETS
-  // * Test de tipo Get nota unitataria por id
+  // * Test de tipo Get nota unitaria por id
   test('CRUD:Get one note for id', async () => {
     await api
-      .get(`/api/notes/oneNote/${idNote1}`)
+      .get(`/api/notes/one/${idNote1}`)
+      .set({ Authorization: `Bearer ${token}` })
       .expect(200)
-    await api
-      .get(`/api/notes/oneNote/${idNote2}`)
+      await api
+      .get(`/api/notes/one/${idNote2}`)
+      .set({ Authorization: `Bearer ${token}` })
       .expect(200)
   })
   // * Test de tipo Get todas las notas
@@ -56,7 +58,7 @@ describe('All Test CRUD ', () => {
       content: 'Esta nota fue creada para probar el POST'
     }
     await api
-      .post('/api/notes/createNote')
+      .post('/api/notes/create')
       .set({ Authorization: `Bearer ${token}` })
       .send(newNote)
       .expect(200)

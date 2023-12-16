@@ -1,5 +1,7 @@
-GET http://localhost:3003/api/users/oneUSer
+POST https://birsbane-numbat-zjcf.1.us-1.fl0.io/api/user/auth
 Content-Type : application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYTkzYjExZWU1ZDRjYmFkZmJjNTViYSIsIm5hbWV1c2VyIjoibHVpc1VzZXIiLCJpYXQiOjE2NTYyOTI0Mjl9.Gk63YzuMLVuOtZ2BaXUFHCYLvCClzRCFbDjWXGGabr8
 
-{}
+{
+  "email": "adminAlex@email.com",
+  "password": "pass1326"
+}
