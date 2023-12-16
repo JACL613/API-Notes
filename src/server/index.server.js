@@ -5,7 +5,6 @@ const cors = require('cors')
 const path = require('path')
 const app = express()
 
-
 require('../databases/connectionsDB')
 
 const noteRouter = require('./controllers/note.routes')
@@ -25,7 +24,7 @@ if (process.env.NODE_ENV === 'test') {
 }
 
 app.use('/api/users', userRouter)
-app.use('/api/notes',middelware.getAutorization, noteRouter)
+app.use('/api/notes', middelware.getAutorization, noteRouter)
 app.use(express.static(path.join((__dirname, '../app/build'))))
 
 // app.get('/', function (req, res) {

@@ -33,13 +33,13 @@ userRouter.get('/oneUser', async (req, res) => {
 
 userRouter.post('/create', async (req, res) => {
   const { body } = req
-  const { name, nameuser, password, refAvatar } = body
+  const { firstName, lastName, email, password } = body
   const saltRounds = 10
   const passwordHash = await bcrypt.hash(password, saltRounds)
   const query = await User.find({
     $or: [
-      { name },
-      { nameuser },
+      { firstName },
+      { email },
       { passwordHash }
     ]
   })
@@ -47,16 +47,15 @@ userRouter.post('/create', async (req, res) => {
     const passwordCorrect = query[0]
       ? await bcrypt.compare(password, query[0].passwordHash)
       : false
-    if (query[0].nameuser === nameuser || !passwordCorrect) {
+    if (query[0].firstName === firstName || !passwordCorrect) {
       return res.status(400).json({ message: 'Invalid password o username have create' })
     }
   }
   const user = new User({
-    name,
-    nameuser,
-    passwordHash,
-    date: new Date().getTime(),
-    refAvatar
+    firstName,
+    lastName,
+    email,
+    passwordHash
   })
   const saveUser = await user.save()
 
@@ -65,9 +64,10 @@ userRouter.post('/create', async (req, res) => {
 
 userRouter.post('/login', async (req, res) => {
   const { body } = req
-  const { nameuser, password } = body
+  const { email, password } = body
 
-  const user = await User.findOne({ nameuser })
+  const user = await User.findOne({ email })
+  console.log('user', user);
   const passwordCorrect = user == null
     ? false
     : await bcrypt.compare(password, user.passwordHash)
@@ -77,15 +77,14 @@ userRouter.post('/login', async (req, res) => {
   }
   const userForToken = {
     id: user._id,
-    nameuser: user.nameuser
+    firstName: user.firstName,
+    email: user.email
   }
   const token = jwt.sign(userForToken, process.env.SECRET)
 
   res.send({
-    name: user.name,
-    username: user.nameuser,
+    firstName: user.firstName,
     token,
-    refAvatar: user.refAvatar
 
   })
 })
