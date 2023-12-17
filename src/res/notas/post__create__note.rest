@@ -1,8 +1,8 @@
 POST http://localhost:3003/api/notes/create
 Content-Type : application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYTkzYjExZWU1ZDRjYmFkZmJjNTViYSIsIm5hbWV1c2VyIjoibHVpc1VzZXIiLCJpYXQiOjE2OTczMzkwOTJ9.Wmz9OEpETzH7UhVwJm1d6L3ZGrP0TijCviW3DogFzpY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2NhMDYwYjkwMzBkZmJlMDI3MzhlMiIsImZpcnN0TmFtZSI6InJvb3QyIiwiZW1haWwiOiJyb290QGV4YW1wbGUuY29tIiwiaWF0IjoxNzAyODUwNDE1fQ.e7zuhxylqcQEXXeVsaQeSbz_iwCHRVdQYchhnoF4Ozw
 
 {
-    "title": "Nota prueba v8",
-    "content": "nota de prueba v8"
+    "title": "Nota prueba v1",
+    "content": "nota de prueba v1"
 }

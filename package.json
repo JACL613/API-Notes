@@ -6,6 +6,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node ./src/server/index.server.js",
     "start:dev": "cross-env NODE_ENV=developement nodemon ./src/server/index.server.js",
+    "start:local": "cross-env NODE_ENV=local nodemon ./src/server/index.server.js",
     "start:test": "cross-env NODE_ENV=test nodemon ./src/server/index.server.js",
     "test": "cross-env NODE_ENV=test  jest --verbose",
     "test:watch": "npm run test -- --watch",

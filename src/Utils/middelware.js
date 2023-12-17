@@ -42,10 +42,10 @@ const getAutorization = async (req, res, next) => {
     if (!query || query === null || query === undefined) {
       return res.status(400).json({ message: 'No se encontró la nota' })
     }
-    const { nameuser } = decodedToken
+    const { email } = decodedToken
     console.log(noteId, query)
     const { userAuthor: user } = query
-    if (nameuser !== user.nameuser) {
+    if (email !== user.email) {
       return res.status(400).json({ error: 'Usuario Invalid' })
     }
     // envía directamente el usuario

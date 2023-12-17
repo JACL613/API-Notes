@@ -6,19 +6,19 @@ noteRouter.get('/', async (req, res) => {
   // !Obtiene todas las notas
   const Notes = await Note.find({}).populate({
     path: 'userAuthor',
-    select: { name: 1, nameuser: 1, _id: 0 }
+    select: { firstName: 1, email: 1, _id: 0 }
   })
   // las filtra por el nombre de usuario
-  const nameuser = req.body.user.nameuser
-  const filterNote = Notes.filter(item => item.userAuthor.nameuser === nameuser)
+  const { email } = req.body.user
+  const filterNote = Notes.filter(item => item.userAuthor.email === email)
   res.json(filterNote)
 })
 noteRouter.get('/one/', async (req, res) => {
   // !Obtiene una sola nota
   const id = req.get('id')
   const query = await Note.findById(id).populate('userAuthor', {
-    name: 1,
-    nameuser: 1,
+    firstName: 1,
+    email: 1,
     _id: 0
   })
   if (query === null) {
@@ -64,11 +64,13 @@ noteRouter.post('/create', async (req, res) => {
   const noteNew = new Note({
     title,
     content,
-    date: new Date().getTime(),
+    startDate: new Date().getTime(),
+    finishDate: new Date(),
     userAuthor: user.toJSON().id
   })
   const saveNote = await noteNew.save()
-  user.note = user.note.concat(saveNote._id)
+  console.log(user  )
+  user.notes = user.notes.concat(saveNote._id)
   await user.save()
 
   res.status(200).json(noteNew) 
