@@ -7,7 +7,7 @@ if (process.env.NODE_ENV === 'test') {
 }
 if (process.env.NODE_ENV === 'local') {
   console.log('entorno local')
-  connectionString = process.env.DB_URI_TEST_LOCAL
+  conecctionString = process.env.DB_URI_TEST_LOCAL
 }
 
 mongoose.connect(`${conecctionString}`)
