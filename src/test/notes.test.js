@@ -32,12 +32,14 @@ describe('All Test CRUD', () => {
   // * Test de tipo Get nota unitaria por id
   test('CRUD:Get one note for id', async () => {
     await api
-      .get(`/api/notes/one/${idNote1}`)
+      .get('/api/notes/one/')
       .set({ Authorization: `Bearer ${token}` })
+      .set({Id: idNote1})
       .expect(200)
       await api
-      .get(`/api/notes/one/${idNote2}`)
+      .get('/api/notes/one/')
       .set({ Authorization: `Bearer ${token}` })
+      .set({Id: idNote2})
       .expect(200)
   })
   // * Test de tipo Get todas las notas
