@@ -14,7 +14,6 @@ const defaultUser = {
 // ! Registro de usuario admin
 const handelCreateUser = async () => {
   const passwordHash = await bcrypt.hash(defaultUser.password, 10)
-  delete defaultUser.password
   const user = new User({ ...defaultUser, passwordHash })
   const saveUser = await user.save()
   const id = saveUser._id.toString()

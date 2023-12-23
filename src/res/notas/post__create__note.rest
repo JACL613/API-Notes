@@ -3,6 +3,6 @@ Content-Type : application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2NhMDYwYjkwMzBkZmJlMDI3MzhlMiIsImZpcnN0TmFtZSI6InJvb3QyIiwiZW1haWwiOiJyb290QGV4YW1wbGUuY29tIiwiaWF0IjoxNzAyODUwNDE1fQ.e7zuhxylqcQEXXeVsaQeSbz_iwCHRVdQYchhnoF4Ozw
 
 {
-    "title": "Nota prueba v1",
-    "content": "nota de prueba v1"
+    "title": "Nota prueba v2",
+    "content": "nota de prueba v2"
 }

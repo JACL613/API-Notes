@@ -16,12 +16,12 @@ const defaultNotes = [
   }
 ]
 const handelSaveNote1 = async (params) => {
-  const note1 = new Note({ ...defaultNotes[0] })
+  const note1 = new Note({ ...defaultNotes[0], userAuthor: params })
   const saveNote1 = await note1.save()
   return saveNote1._id.toString()
 }
 const handelSaveNote2 = async (params) => {
-  const note2 = new Note({ ...defaultNotes[1] })
+  const note2 = new Note({ ...defaultNotes[1], userAuthor: params })
   const saveNote2 = await note2.save()
   return saveNote2._id.toString()
 }

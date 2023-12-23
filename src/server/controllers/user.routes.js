@@ -20,14 +20,12 @@ userRouter.get('/oneUser', async (req, res) => {
     return res.status(400).json({ error: 'Invalid token' })
   }
   const { id: userId } = decodedToken
-  console.log(userId);
   const user = await User.findById(userId).populate('note', {
     title: 1,
     content: 1
 
   })
   // Crear control de errores
-  console.log(user);
   res.send(user)
 })
 
@@ -67,7 +65,6 @@ userRouter.post('/login', async (req, res) => {
   const { email, password } = body
 
   const user = await User.findOne({ email })
-  console.log('user', user);
   const passwordCorrect = user == null
     ? false
     : await bcrypt.compare(password, user.passwordHash)

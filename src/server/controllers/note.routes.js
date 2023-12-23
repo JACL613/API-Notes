@@ -44,7 +44,6 @@ noteRouter.post('/create', async (req, res) => {
   // Toma el id usuario y comprueba que la nota pertenece a su colección
   const userId  = body.user.id
   const user = await User.findById(userId)
-  console.log(user);
   if (!user || user == null || user==undefined) {
     return res.status(400).json({ error: 'Invalid User sesión' })
   }
@@ -69,7 +68,6 @@ noteRouter.post('/create', async (req, res) => {
     userAuthor: user.toJSON().id
   })
   const saveNote = await noteNew.save()
-  console.log(user  )
   user.notes = user.notes.concat(saveNote._id)
   await user.save()
 
