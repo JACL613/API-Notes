@@ -31,16 +31,29 @@ describe('All Test CRUD', () => {
   // ! GETS
   // * Test de tipo Get nota unitaria por id
   test('CRUD:Get one note for id', async () => {
+<<<<<<< HEAD
     await api
       .get('/api/notes/one/')
+=======
+    const resNote1 = await api
+      .get(`/api/notes/one/${idNote1}`)
+>>>>>>> 96b549c1f837e7845ad57f0b74da13440c6e61bb
       .set({ Authorization: `Bearer ${token}` })
       .set({Id: idNote1})
       .expect(200)
+<<<<<<< HEAD
       await api
       .get('/api/notes/one/')
+=======
+    const resNote2 = await api
+      .get(`/api/notes/one/${idNote2}`)
+>>>>>>> 96b549c1f837e7845ad57f0b74da13440c6e61bb
       .set({ Authorization: `Bearer ${token}` })
       .set({Id: idNote2})
       .expect(200)
+
+    expect(resNote1.body.title).toBe(defaultNotes[0].title)
+    expect(resNote1.body.content).toBe(defaultNotes[0].content)
   })
   // * Test de tipo Get todas las notas
   test('CRUD:Get all notes', async () => {
@@ -55,10 +68,7 @@ describe('All Test CRUD', () => {
   //! POST
   // * Test de tipo Post para crear notas
   test('CRUD:Post Create one note', async () => {
-    const newNote = {
-      title: 'Nota nueva de test',
-      content: 'Esta nota fue creada para probar el POST'
-    }
+    const newNote = { ...defaultNotes[0] }
     await api
       .post('/api/notes/create')
       .set({ Authorization: `Bearer ${token}` })
