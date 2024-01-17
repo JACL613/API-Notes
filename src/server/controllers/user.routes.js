@@ -20,7 +20,8 @@ userRouter.get('/oneUser', async (req, res) => {
     return res.status(400).json({ error: 'Invalid token' })
   }
   const { id: userId } = decodedToken
-  const user = await User.findById(userId).populate('note', {
+  
+  const user = await User.findById(userId).populate('notes', {
     title: 1,
     content: 1
 

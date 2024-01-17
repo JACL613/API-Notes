@@ -6,13 +6,14 @@ const Note = require('../databases/models/Model.Note')
 const getAutorization = async (req, res, next) => {
   // Esta parte extrae la autorización de la cabecera http
   //
+  console.log('Vereficando...');
   const autorization = req.get('authorization')
   let token = ''
 
   if (autorization && autorization.toLowerCase().startsWith('bearer')) {
     token = autorization.substring(7)
   }
-  if (!token) {
+  if (!token || token === null) {
     return res.status(400).json({ message: 'Invalid token' })
   }
   // Esto comprueba que la autorización no valla a ser errada
@@ -26,8 +27,8 @@ const getAutorization = async (req, res, next) => {
       return res.status(400).json({ error: 'No se pudo desencriptar la autorización' })
     }
   }
-
-  if (req.method !== 'GET' && req.method !== 'POST') {
+console.log(req.originalUrl);
+  if (req.method !== 'GET' && req.method !== 'POST' || req.originalUrl === '/api/users/oneUser') {
     // Si el método es DELETE o UPDATE necesita comprobar que la nota le pertenezca al usuario
     const noteId = req.get('id')
     const query = await Note.findById(noteId).populate({
