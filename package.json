@@ -2,7 +2,7 @@
   "name": "api-notes",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./src/server/index.server.js",
   "scripts": {
     "start": "cross-env NODE_ENV=production node ./src/server/index.server.js",
     "start:dev": "cross-env NODE_ENV=developement nodemon ./src/server/index.server.js",
