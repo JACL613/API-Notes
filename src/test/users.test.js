@@ -8,7 +8,7 @@ const { server, app } = require("../server/index.server");
 
 const api = supertest(app);
 
-const {firstName,lastName , email ,password} = defaultUser[0]
+const {firstName,lastName , email ,password} = defaultUser[1]
 
 beforeEach(async () => {
   await User.deleteMany({});
@@ -23,7 +23,7 @@ describe("TEST CRUD USERS API", () => {
     test('conditions for creating users',async () => {
     await api
     .post('/api/users/create')
-    .send(defaultUser)
+    .send({firstName, lastName, email })
     .expect(400)
     })
     
