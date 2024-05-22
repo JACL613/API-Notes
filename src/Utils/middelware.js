@@ -14,7 +14,7 @@ const getAutorization = async (req, res, next) => {
     token = autorization.substring(7)
   }
   if (!token || token === null) {
-    return res.status(400).json({ message: 'Invalid token' })
+    return res.status(401).json({ message: 'Invalid token' })
   }
   // Esto comprueba que la autorización no valla a ser errada
   let decodedToken
@@ -46,7 +46,7 @@ console.log(req.originalUrl);
     const { email } = decodedToken
     const { userAuthor: user } = query
     if (email !== user.email) {
-      return res.status(400).json({ error: 'Usuario Invalid' })
+      return res.status(401).json({ error: 'Usuario Invalid' })
     }
     // envía directamente el usuario
     req.body = { ...req.body, user }

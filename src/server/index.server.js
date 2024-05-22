@@ -25,7 +25,10 @@ if (process.env.NODE_ENV === 'test') {
 
 app.use('/api/users', userRouter)
 app.use('/api/notes', middelware.getAutorization, noteRouter)
-app.use(express.static(path.join((__dirname, '../app/build'))))
+app.use(express.static('public'))
+app.use((req, res) => {
+  res.status(404).sendFile(path.join(__dirname, '../../public/404.html'));
+});
 
 // app.get('/', function (req, res) {
 //   res.sendFile(path.join((__dirname, './public/index.html')))

@@ -32,7 +32,9 @@ userRouter.get("/oneUser", async (req, res) => {
 userRouter.post("/create", async (req, res) => {
   const { body } = req;
   const { firstName, lastName, email, password } = body;
-  console.log(firstName, lastName, email, password);
+  if(!firstName || !lastName || !email || !password) { 
+    return res.status(406).json({error: 'Missing required data'})
+  }
   const saltRounds = 10;
   const passwordHash = await bcrypt.hash(password, saltRounds);
   const query = await User.find({
@@ -42,8 +44,7 @@ userRouter.post("/create", async (req, res) => {
     const passwordCorrect = query[0]
       ? await bcrypt.compare(password, query[0].passwordHash)
       : false;
-      console.log(query);
-    if (query[0].firstName === firstName || !passwordCorrect) {
+    if (query[0].firstName === firstName || passwordCorrect === true) {
       return res
         .status(400)
         .json({ message: "Invalid password o username have create" });

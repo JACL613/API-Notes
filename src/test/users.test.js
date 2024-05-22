@@ -9,6 +9,7 @@ const { server, app } = require("../server/index.server");
 const api = supertest(app);
 
 const {firstName,lastName , email ,password} = defaultUser[1]
+jest.setTimeout(20000);
 
 beforeEach(async () => {
   await User.deleteMany({});
@@ -23,9 +24,21 @@ describe("TEST CRUD USERS API", () => {
     test('conditions for creating users',async () => {
     await api
     .post('/api/users/create')
-    .send({firstName, lastName, email })
-    .expect(400)
+    .send({firstName, lastName, email, password: ''})
+    .expect(406)
     })
+    test('conditions for creating users duplication',async () => {
+      await api
+      .post('/api/users/create')
+      .send({firstName:defaultUser[0].firstName, lastName, email, password: defaultUser[0].password})
+      .expect(400)
+      })
+    test('shipping without information',async () => {
+      await api
+      .post('/api/users/create')
+      .send({})
+      .expect(406)
+      })
     
 })
 
