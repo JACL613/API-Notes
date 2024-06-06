@@ -37,9 +37,8 @@ describe("All Test CRUD", () => {
   test("CRUD:Get one note for id", async () => {
     await api
       .get("/api/notes/one/")
-      .set({ Authorization: `Bearer ${token}` })
       .set({ Id: idNote1 })
-      .expect(200);
+      .expect(401);
     await api
       .get("/api/notes/one/")
       .set({ Authorization: `Bearer ${token}` })

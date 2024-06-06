@@ -3,11 +3,8 @@ const jwt = require("jsonwebtoken");
 const userRouter = require("express").Router();
 const User = require("../../databases/models/Model.User");
 
-userRouter.get("/", (req, res) => {
-  res.send("welcomen to api notes");
-});
 
-userRouter.get("/oneUser", async (req, res) => {
+userRouter.get("/", async (req, res) => {
   const authorization = req.get("authorization");
   let token = "";
 
@@ -63,13 +60,16 @@ userRouter.post("/create", async (req, res) => {
 
 userRouter.post("/login", async (req, res) => {
   const { body } = req;
+  console.log(body)
   const { email, password } = body;
 
   const user = await User.findOne({ email });
+  console.log(user)
   const passwordCorrect =
     user == null ? false : await bcrypt.compare(password, user.passwordHash);
-
+  console.log(passwordCorrect)
   if (!passwordCorrect) {
+    console.log("Password incorrect")
     return res.status(401).json({ errors: "invalid user or password" });
   }
   const userForToken = {

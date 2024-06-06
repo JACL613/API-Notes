@@ -9,7 +9,7 @@ const getAutorization = async (req, res, next) => {
   console.log('Vereficando...');
   const autorization = req.get('authorization')
   let token = ''
-
+  console.log({autorization: autorization})
   if (autorization && autorization.toLowerCase().startsWith('bearer')) {
     token = autorization.substring(7)
   }
